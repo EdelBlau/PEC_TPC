@@ -10,9 +10,13 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'fotocasa'
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
 SPIDER_MODULES = ['fotocasa.spiders']
 NEWSPIDER_MODULE = 'fotocasa.spiders'
+
+SPLASH_URL = 'http://0.0.0.0:8050'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -50,11 +54,21 @@ ROBOTSTXT_OBEY = True
 #    'fotocasa.middlewares.FotocasaSpiderMiddleware': 543,
 #}
 
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
 #    'fotocasa.middlewares.FotocasaDownloaderMiddleware': 543,
 #}
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

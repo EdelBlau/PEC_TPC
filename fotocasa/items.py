@@ -6,9 +6,24 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-
+from scrapy.item import Item, Field
 
 class FotocasaItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    referencia = Field()
+    nombre = Field()
+    precio = Field()
+    particular = Field()
+    imagenes = Field()
+    habitaciones = Field()
+    banos = Field()
+    superficie = Field()
+    planta = Field()
+    precio_m = Field()
+    caracteristicas = Field()
+    link = Field()
+    web = Field()
+    ciudad = Field()
+    comunidad = Field()
+    codigoPostal = Field()
+    localidad = Field()
+    telefono = Field()
