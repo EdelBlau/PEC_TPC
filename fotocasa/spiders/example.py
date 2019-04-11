@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from fotocasa.items import FotocasaItem
+from urllib.parse import urlparse
 
 class ExampleSpider(scrapy.Spider):
     name = 'example'
@@ -20,8 +21,23 @@ class ExampleSpider(scrapy.Spider):
             yield request
 
     def parse_vivienda(self, response):
+        parsed_uri = urlparse( response.url )
+        
         item = FotocasaItem()
-        item['link'] = response.url
-        #TODO extraccion de la información
+        item['banos'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[1].re_first( r'[0-9]+' )
+        #TODO item['caracteristicas'] =
+        item['ciudad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[3].get()
+        item['codigoPostal'] = response.xpath( '//p[@class = "fc-DetailDescription"]/text()' ).re_first( r'[0-9]{5}' )
+        item['comunidad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[0].get()
+        item['habitaciones'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[0].re_first( r'[0-9]+' )
+        item['link'] = response.request.url
+        #TODO item['localidad'] =
+        item['particular'] = 'Profesional' if response.xpath( '//div[@class = "re-ContactDetail-inmo"]' ) else 'Particular'
+        item['planta'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[3].re_first( r'[0-9]+' )
+        item['precio'] = response.xpath( '//span[@class = "re-DetailHeader-price"]/text()' ).re_first( r'[0-9]+\.[0-9]+' )
+        item['precio_m'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[4].re_first( r'[0-9]+\.[0-9]+' )
+        item['referencia'] = response.xpath( '//span[@class = "re-DetailReference"]/text()' ).re_first( r'[0-9]+' )
+        item['superficie'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[2].re_first( r'[0-9]+' )
+        item['web'] = '{uri.netloc}'.format( uri = parsed_uri )
 
         yield item
