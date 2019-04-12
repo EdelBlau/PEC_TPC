@@ -11,6 +11,14 @@ La práctica ha sido realizada de manera conjunta por:
 
 ## Ficheros de código fuente
 
+* fotocasa/spiders/\_\_init\_\_.py
+* fotocasa/spiders/example.py
+* fotocasa/spiders/pisos.py
+* fotocasa/\_\_init\_\_.py
+* fotocasa/items.py
+* fotocasa/middlewares.py
+* fotocasa/pipelines.py
+* fotocasa/settings.py
 
 ## Recursos
 
