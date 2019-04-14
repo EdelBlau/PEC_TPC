@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#scrapy crawl example -t csv -o fotocasa.csv --loglevel=INFO
+
 import scrapy
 from fotocasa.items import InmuebleItem
 from urllib.parse import urlparse
