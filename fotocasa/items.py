@@ -8,7 +8,7 @@
 import scrapy
 from scrapy.item import Item, Field
 
-class FotocasaItem(scrapy.Item):
+class InmuebleItem(scrapy.Item):
     referencia = Field()
     nombre = Field()
     precio = Field()

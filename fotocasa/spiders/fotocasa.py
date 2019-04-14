@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #scrapy crawl example -t csv -o fotocasa.csv --loglevel=INFO
 import scrapy
-from fotocasa.items import FotocasaItem
+from fotocasa.items import InmuebleItem
 from urllib.parse import urlparse
 
-class ExampleSpider(scrapy.Spider):
-    name = 'example'
+class FotocasaSpider(scrapy.Spider):
+    name = 'fotocasa'
     def start_requests(self):
         urls = [
             'https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l',
@@ -30,8 +30,6 @@ class ExampleSpider(scrapy.Spider):
         print(links)
         for i in range(0,len(links)):
             item = FotocasaItem()
-            #item['habitaciones'] = habitaciones[i]
-            #item['superficie'] = superficies[i]
             item['precio'] = precios[i]
             item ['link'] = 'https://www.fotocasa.es' + links[i]
             request = scrapy.Request(item['link'], callback=self.parse_vivienda, meta={'item': item})
@@ -39,7 +37,7 @@ class ExampleSpider(scrapy.Spider):
 
     def parse_vivienda(self, response):
                 
-        item = FotocasaItem()
+        item = InmuebleItem()
         item['ciudad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[2].get()
         #item['codigoPostal'] = response.xpath( '//p[@class = "fc-DetailDescription"]/text()' ).re_first( r'[0-9]{5}' )
         item['comunidad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[0].get()
