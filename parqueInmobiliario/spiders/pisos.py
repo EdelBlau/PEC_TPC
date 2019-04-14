@@ -31,7 +31,7 @@ class PisosSpider(scrapy.Spider):
         item['banos'] = response.xpath( '//div[@class = "basicdata-item"]/text()' )[2].re_first( r'[0-9]+' )
         item['referencia'] = response.xpath('//li[@class="charblock-element more-padding"]//text()').re(r':(.*-.*)')
         item['particular'] = 'Profesional' if response.xpath( '//div[@class = "owner-data-logo"]' ) else 'Particular'
-        item['ciudad'] = response.xpath( '//h2[@class = "position"]/text()' ).extract_first()
+        item['ciudad'] = response.xpath( '//h2[@class = "position"]/text()' ).re_first(r'\((.*)\)')
         item['comunidad'] = response.xpath( '//h2[@class = "position"]/text()' ).extract_first()
         
         '''        
