@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
-from fotocasa.items import InmuebleItem
+from parqueInmobiliario.items import InmuebleItem
 from urllib.parse import urlparse
 
 class FotocasaSpider(scrapy.Spider):
@@ -18,7 +18,7 @@ class FotocasaSpider(scrapy.Spider):
 #App > div > div.re-Page > div > div.re-Searchpage-wrapper > div.re-Searchresult-wrapper > div.re-Searchresult > div:nth-child(2) > div > div > div.sui-CardComposable-primary > div > a
     def parse(self, response):
 
-        for i in range(1,10):
+        for i in range(1,20):
             link = "https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l/" + str(i)
             yield scrapy.Request(link, self.parse_pagina)
         
@@ -29,7 +29,7 @@ class FotocasaSpider(scrapy.Spider):
         #superficies = response.xpath('//span[@class="re-Card-wrapperFeatures"]/span/text()')[1].extract()
         print(links)
         for i in range(0,len(links)):
-            item = FotocasaItem()
+            item = InmuebleItem()
             item['precio'] = precios[i]
             item ['link'] = 'https://www.fotocasa.es' + links[i]
             request = scrapy.Request(item['link'], callback=self.parse_vivienda, meta={'item': item})

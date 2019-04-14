@@ -6,6 +6,6 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-class FotocasaPipeline(object):
+class ParqueInmobiliarioPipeline(object):
     def process_item(self, item, spider):
         return item

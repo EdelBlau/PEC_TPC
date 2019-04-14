@@ -5,7 +5,6 @@ En esta práctica de la asignatura Tipología y Ciclo de Vida de los Datos, pert
 Para ejecutar los spiders, en primer lugar debe crearse un virtual enviroment de Python y activarlo. Después, se instala Scrapy mediante pip
 ```
 pip install scrapy
-
 ```
 
 o bien 
@@ -31,14 +30,14 @@ La práctica ha sido realizada de manera conjunta por:
 
 ## Ficheros de código fuente
 
-* fotocasa/spiders/\_\_init\_\_.py
-* fotocasa/spiders/fotocasa.py
-* fotocasa/spiders/pisos.py
-* fotocasa/\_\_init\_\_.py
-* fotocasa/items.py
-* fotocasa/middlewares.py
-* fotocasa/pipelines.py
-* fotocasa/settings.py
+* fotocasa/spiders/\_\_init\_\_.py --> por defecto
+* fotocasa/spiders/fotocasa.py --> spider para wen Fotocasa.es
+* fotocasa/spiders/pisos.py --> spider para web Pisos.com
+* fotocasa/\_\_init\_\_.py --> por defecto
+* fotocasa/items.py --> modelo del objeto InmuebleItem
+* fotocasa/middlewares.py --> por defecto
+* fotocasa/pipelines.py --> por defecto
+* fotocasa/settings.py --> indicacion de user-agent
 
 ## Recursos
 

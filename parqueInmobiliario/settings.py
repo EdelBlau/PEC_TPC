@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for fotocasa project
+# Scrapy settings for parqueInmobiliario project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,18 +9,18 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'fotocasa'
+BOT_NAME = 'parqueInmobiliario'
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
-SPIDER_MODULES = ['fotocasa.spiders']
-NEWSPIDER_MODULE = 'fotocasa.spiders'
+SPIDER_MODULES = ['parqueInmobiliario.spiders']
+NEWSPIDER_MODULE = 'parqueInmobiliario.spiders'
 
 SPLASH_URL = 'http://0.0.0.0:8050'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'fotocasa (+http://www.yourdomain.com)'
+USER_AGENT = 'parqueInmobiliario (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -51,7 +51,7 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'fotocasa.middlewares.FotocasaSpiderMiddleware': 543,
+#    'parqueInmobiliario.middlewares.ParqueInmobiliarioSpiderMiddleware': 543,
 #}
 
 SPIDER_MIDDLEWARES = {
@@ -61,7 +61,7 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'fotocasa.middlewares.FotocasaDownloaderMiddleware': 543,
+#    'parqueInmobiliario.middlewares.ParqueInmobiliarioDownloaderMiddleware': 543,
 #}
 
 DOWNLOADER_MIDDLEWARES = {
@@ -79,7 +79,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'fotocasa.pipelines.FotocasaPipeline': 300,
+#    'parqueInmobiliario.pipelines.ParqueInmobiliarioPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
