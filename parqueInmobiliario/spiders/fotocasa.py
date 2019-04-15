@@ -15,7 +15,7 @@ class FotocasaSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        for i in range(1,2):
+        for i in range(1,20):
             link = response.url + str(i)
             yield scrapy.Request(link, self.parse_pagina)
         

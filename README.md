@@ -16,9 +16,9 @@ o bien
 Los spiders se ejecutan desde la raíz del proyecto de la siguiente forma
 
 ```
-scrapy crawl nombre-spider -t csv -o nombre-fichero.csv --loglevel=INFO
+scrapy crawl nombre-spider -t csv -o nombre-fichero.csv --loglevel=INFO -a ciudad=nombre-ciudad
 ```
-Siendo **nombre-spider** fotocasa o pisos, dependiendo de la web de la cual quieran extraerse los datos, y **nombre-fichero** el nombre del fichero csv que contendrá los datos extraídos. Se extraen las 20 primeras páginas de los pisos más recientes en Madrid y Barcelona. 
+Siendo **nombre-spider** fotocasa o pisos, dependiendo de la web de la cual quieran extraerse los datos, y **nombre-fichero** el nombre del fichero csv que contendrá los datos extraídos. También será posible indicar la ciudad de la cual se quieren extraer los inmuebles, mediante el argumento **nombre-ciudad**. Este atributo deberá ir en minúsculas y los espacios con giones. Se recomienda comprobar que la ciudad exista en la web a parsear antes de indicarlo. Se extraerán las 20 primeras páginas de los pisos más recientes en Madrid y Barcelona para el dataset a entregar. En estos casos, el valor de **nombre-ciudad** sera "madrid" y "barcelona" respectivamente. 
 
 
 ## Miembros del equipo
