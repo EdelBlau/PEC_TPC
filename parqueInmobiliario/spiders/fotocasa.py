@@ -6,20 +6,17 @@ from urllib.parse import urlparse
 
 class FotocasaSpider(scrapy.Spider):
     name = 'fotocasa'
-    def start_requests(self):
-        urls = [
-            'https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l',
-            #'https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l?sortType=publicationDate&latitude=40.415&longitude=-3.71036&combinedLocationIds=724,14,28,173,0,0,0,0,0&gridType=3',
-            #'https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l/2?sortType=publicationDate&amp;latitude=40.415&amp;longitude=-3.71036&amp;combinedLocationIds=724,14,28,173,0,0,0,0,0&amp;gridType=3'
+    def __init__(self, *args, **kwargs):
 
+        super(FotocasaSpider, self).__init__(*args, **kwargs)
+        self.start_urls = [
+            "https://www.fotocasa.es/es/comprar/viviendas/"+ kwargs.get('ciudad') +"-provincia/todas-las-zonas/l/"
         ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
-#App > div > div.re-Page > div > div.re-Searchpage-wrapper > div.re-Searchresult-wrapper > div.re-Searchresult > div:nth-child(2) > div > div > div.sui-CardComposable-primary > div > a
+
     def parse(self, response):
 
-        for i in range(1,20):
-            link = "https://www.fotocasa.es/es/comprar/viviendas/madrid-provincia/madrid-zona-de/l/" + str(i)
+        for i in range(1,2):
+            link = response.url + str(i)
             yield scrapy.Request(link, self.parse_pagina)
         
     def parse_pagina(self, response):
@@ -41,10 +38,9 @@ class FotocasaSpider(scrapy.Spider):
         item['ciudad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[2].get()
         #item['codigoPostal'] = response.xpath( '//p[@class = "fc-DetailDescription"]/text()' ).re_first( r'[0-9]{5}' )
         item['comunidad'] = response.xpath( '//a[@class = "re-Breadcrumb-link"]/text()' )[0].get()
-        item['habitaciones'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[0].re_first( r"[0-9]+ hab" )
-        item['banos'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[1].re_first( r'[0-9]+ baño' )       
+        item['habitaciones'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[0].re_first( r"([0-9]+) hab" )
+        item['banos'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[1].re_first( r'([0-9]+) baño' )       
         item['superficie'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[2].re_first( r'[0-9]+' )
-        item['planta'] = response.xpath( '//li[@class = "re-DetailHeader-featuresItem"]/text()' )[3].re_first( r'[0-9]+' )
         item['precio'] = response.xpath( '//span[@class = "re-DetailHeader-price"]/text()' ).re_first( r'[0-9]+\.[0-9]+' )
         item['referencia'] = response.xpath( '//span[@class = "re-DetailReference"]/text()' ).re_first( r'[0-9]+' )
         item['particular'] = 'Profesional' if response.xpath( '//div[@class = "re-ContactDetail-inmo"]' ) else 'Particular'
