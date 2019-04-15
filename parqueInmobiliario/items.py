@@ -10,17 +10,15 @@ from scrapy.item import Item, Field
 
 class InmuebleItem(scrapy.Item):
     referencia = Field()
-    nombre = Field()
     precio = Field()
     particular = Field()
-    #imagenes = Field()
     habitaciones = Field()
     banos = Field()
     superficie = Field()
-    planta = Field()
+    link = Field()
+    web = Field()
     ciudad = Field()
     comunidad = Field()
-    codigoPostal = Field()
-    web = Field()
-    link = Field()
+    
+    
 
